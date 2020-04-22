@@ -55,8 +55,45 @@ With output redirection, if the redirection character is > then the outputfile i
 6. The command line prompt must contain the pathname of the current directory.
 Note: You can assume that all command line arguments (including the redirection symbols, <, > & >> and the background execution symbol, &) will be delimited from other command line arguments by white space - one or more spaces and/or tabs (see the command line in 4. above).
 
+## Done
+基于C语言实现在Linux环境下的shell程序；支持部分内置命令与外部命令。
 
-## Todo
-makefile;
+## 内部命令
 
-shell build-in command;
+通过C语言实现了8个内置命令，cd、echo、clr、dir、help、
+environ、puase、exit
+
+```js
+//跳转到指定的目录
+cd <目录>
+//字符回显
+echo <string>
+//清屏功能
+clr
+//列出当前目录下的文件
+dir
+//获取可用的内置命令
+help
+//列出当前的环境变量
+environ
+//暂停程序直至输入Enter
+pause
+//退出my_shell
+exit
+```
+
+## 外部命令
+
+在my_shell中使用创建新的进程的方法实现外部命令，对于外部命令，使用fork( )函数与exec( )函数，使用fork函数复制当前进程，并且使用exec函数的变体execvp( )函数传入参数来执行外部命令。
+
+## 基本思路
+
+从输入中读取字符串并且进行处理、匹配、执行（内置命令或者外部命令），基于循环的方式来完成整个shell。
+
+## 存在问题
+
+1. 不支持转义输入
+2. 不支持输入输出的重定向
+3. 对于大量输入的内存分配问题
+
+注：my_shell参考 [github链接](https://github.com/brenns10/lsh) 所完成。
